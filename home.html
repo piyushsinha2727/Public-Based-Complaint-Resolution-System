@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PBCRS – Public-Based Complaint Resolution System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="home-page">
+
+<div class="star-bg"></div>
+
+<div class="home-wrapper">
+
+    <h1>PBCRS – Public-Based Complaint Resolution System</h1>
+    <p class="home-subtitle">
+        AI-assisted platform for transparent and accountable civic issue resolution
+    </p>
+
+    <div class="role-grid">
+
+        <!-- ================= CITIZEN ================= -->
+        <div class="role-card blue-glow">
+            <div class="icon">👤</div>
+            <h3>Public / Citizen</h3>
+            <p>
+                Report civic issues with image and location,
+                track progress, and verify resolution.
+            </p>
+
+            <!-- LOGIN GATE -->
+            <a href="login.html?role=citizen" class="role-btn blue">
+                Raise Complaint
+            </a>
+        </div>
+
+        <!-- ================= ADMINISTRATOR ================= -->
+        <div class="role-card yellow-glow">
+            <div class="icon">🛠️</div>
+            <h3>Administrator</h3>
+            <p>
+                Review complaints, prioritize severity,
+                assign resolvers, and monitor SLAs.
+            </p>
+
+            <!-- LOGIN GATE -->
+            <a href="login.html?role=admin" class="role-btn yellow">
+                Admin Dashboard
+            </a>
+        </div>
+
+        <!-- ================= RESOLVER ================= -->
+        <div class="role-card green-glow">
+            <div class="icon">👷</div>
+            <h3>Resolver</h3>
+            <p>
+                Resolve assigned issues, upload proof of work,
+                and update complaint status.
+            </p>
+
+            <!-- LOGIN GATE -->
+            <a href="login.html?role=resolver" class="role-btn green">
+                Resolver Dashboard
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ONLY external JS -->
+<script src="script.js"></script>
+
+</body>
+</html>

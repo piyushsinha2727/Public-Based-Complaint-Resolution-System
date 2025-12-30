@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resolve & Restore</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="resolve-page">
+
+<div class="star-bg"></div>
+
+<div class="resolve-wrapper">
+
+    <h1>Resolve & Restore</h1>
+    <p class="subtitle">Upload Resolution Proof</p>
+
+    <div class="glass-card">
+
+        <!-- Complaint ID -->
+        <div class="field">
+            <label>Complaint ID</label>
+            <input type="number" id="complaintId" placeholder="Enter Complaint ID" required>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="upload-grid">
+
+            <!-- Before Image -->
+            <div class="image-box">
+                <p>Before (Complaint)</p>
+                <img src="https://via.placeholder.com/200x140?text=Before+Image">
+            </div>
+
+            <!-- After Image -->
+            <div class="image-box upload-box">
+                <p>After (Resolution Proof)</p>
+                <label class="upload-area">
+                    <input type="file" id="afterImage" hidden required>
+                    <span>📤 Upload Proof</span>
+                </label>
+            </div>
+
+        </div>
+
+        <!-- Submit -->
+        <button class="glow-btn" id="submitProofBtn">
+            Submit Final Proof
+        </button>
+
+        <p id="resolveStatus"></p>
+
+    </div>
+</div>
+
+<!-- Loader & Toast -->
+<div class="loader" id="loader"></div>
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

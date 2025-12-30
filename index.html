@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Raise Complaint</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="resolve-page">
+
+<div class="star-bg"></div>
+
+<div class="resolve-wrapper">
+
+    <h1>Raise Complaint</h1>
+    <p class="subtitle">
+        Submit issue with mandatory proof
+    </p>
+
+    <div class="glass-card">
+
+        <form id="complaintForm" enctype="multipart/form-data">
+
+            <!-- Description -->
+            <div class="field">
+                <label>Complaint Description</label>
+                <input
+                    type="text"
+                    id="description"
+                    placeholder="Describe the civic issue"
+                    required
+                >
+            </div>
+
+            <!-- Location -->
+            <div class="field">
+                <label>Location</label>
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="Enter location"
+                    required
+                >
+            </div>
+
+            <!-- Upload Section -->
+            <div class="upload-grid">
+
+                <!-- Before Image -->
+                <div class="image-box upload-box">
+                    <p>Before Image (Proof)</p>
+                    <label class="upload-area">
+                        <input type="file" id="beforeImage" hidden required>
+                        <span>📤 Upload Image</span>
+                    </label>
+                </div>
+
+                <!-- Info Box -->
+                <div class="image-box">
+                    <p><b>Important</b></p>
+                    <p style="font-size:13px;color:#cbd5f5;">
+                        Complaint will not be processed without image proof.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="glow-btn">
+                Submit Complaint
+            </button>
+
+        </form>
+
+        <p id="statusMessage"></p>
+
+    </div>
+</div>
+
+<!-- Loader & Toast (recommended) -->
+<div class="loader" id="loader"></div>
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

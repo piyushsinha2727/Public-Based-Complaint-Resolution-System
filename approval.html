@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Resolution</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="resolve-page">
+
+<div class="star-bg"></div>
+
+<div class="resolve-wrapper">
+
+    <h1>Verify Resolution</h1>
+    <p class="subtitle">Compare before and after proof</p>
+
+    <div class="glass-card">
+
+        <!-- STATUS TIMELINE -->
+        <div class="timeline">
+            <div class="step done">Submitted</div>
+            <div class="step done">Resolved</div>
+            <div class="step active">User Verification</div>
+        </div>
+
+        <!-- IMAGE SLIDER -->
+        <div class="slider-container">
+            <img src="before.jpg" class="before-img">
+            <div class="slider-overlay">
+                <img src="after.jpg" class="after-img">
+            </div>
+            <input type="range" min="0" max="100" value="50" id="slider">
+        </div>
+
+        <!-- AI SIMILARITY -->
+        <div class="ai-box">
+            <p>AI Proof Similarity</p>
+            <div class="progress-bar">
+                <div class="progress" style="width:92%">92%</div>
+            </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <button class="glow-btn approve" onclick="showToast('Complaint Approved')">
+            Accept Resolution
+        </button>
+
+        <button class="glow-btn reject" onclick="showToast('Complaint Rejected')">
+            Reject Resolution
+        </button>
+
+    </div>
+</div>
+
+<!-- Toast & Loader -->
+<div class="toast" id="toast"></div>
+<div class="loader" id="loader"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

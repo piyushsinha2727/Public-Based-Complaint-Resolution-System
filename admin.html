@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Verification | PBCRS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="resolve-page">
+
+<div class="star-bg"></div>
+
+<div class="resolve-wrapper">
+
+    <h1>Admin Verification</h1>
+    <p class="subtitle">Upload inspection proof</p>
+
+    <div class="glass-card">
+
+        <!-- Complaint ID -->
+        <div class="field">
+            <label>Complaint ID</label>
+            <input type="number" id="adminComplaintId" placeholder="Enter Complaint ID" required>
+        </div>
+
+        <!-- ADMIN IMAGE UPLOAD -->
+        <div class="upload-grid">
+
+            <!-- Preview -->
+            <div class="image-box">
+                <p>Admin Inspection Preview</p>
+                <img id="adminPreview"
+                     src="https://via.placeholder.com/200x140?text=No+Image"
+                     style="width:100%;border-radius:10px;">
+            </div>
+
+            <!-- Upload -->
+            <div class="image-box upload-box">
+                <p>Upload Inspection Image</p>
+                <label class="upload-area">
+                    <input type="file" id="adminImage" hidden accept="image/*">
+                    <span>📤 Upload Photo</span>
+                </label>
+            </div>
+
+        </div>
+
+        <!-- ACTION -->
+        <button class="glow-btn approve" id="adminSubmitBtn">
+            Submit Admin Proof
+        </button>
+
+        <p id="adminStatus"></p>
+
+    </div>
+</div>
+
+<!-- Loader & Toast -->
+<div class="loader" id="loader"></div>
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

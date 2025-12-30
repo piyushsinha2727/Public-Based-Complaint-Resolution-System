@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | PBCRS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="resolve-page">
+
+<div class="star-bg"></div>
+
+<div class="resolve-wrapper">
+
+    <h1>Login</h1>
+    <p class="subtitle">Access your dashboard</p>
+
+    <div class="glass-card">
+
+        <form id="loginForm">
+
+            <div class="field">
+                <label>Email</label>
+                <input type="email" id="loginEmail" required>
+            </div>
+
+            <div class="field">
+                <label>Password</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+
+            <button class="glow-btn" type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <p style="margin-top:15px;font-size:13px;color:#cbd5f5;">
+            New citizen?
+            <a href="signup.html" style="color:#38bdf8;">Create account</a>
+        </p>
+
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
