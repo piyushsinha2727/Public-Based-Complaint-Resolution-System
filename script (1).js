@@ -46,18 +46,172 @@ if (complaintForm) {
         });
     });
 }
+/*home page*/
+gsap.registerPlugin(ScrollTrigger);
 
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Animated Stats Counter
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        ScrollTrigger.create({
+            trigger: counter,
+            start: "top 90%",
+            onEnter: () => {
+                let count = 0;
+                const updateCount = () => {
+                    const speed = target / 80;
+                    if (count < target) {
+                        count += speed;
+                        counter.innerText = Math.ceil(count);
+                        setTimeout(updateCount, 25);
+                    } else { counter.innerText = target; }
+                };
+                updateCount();
+            }
+        });
+    });
+
+    // 2. Monthly Resolution Chart
+    const resCtx = document.getElementById('resolutionChart').getContext('2d');
+    new Chart(resCtx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Resolved Issues',
+                data: [100, 250, 400, 550, 700, 800],
+                borderColor: '#34d399',
+                backgroundColor: 'rgba(52, 211, 153, 0.1)',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: { responsive: true, plugins: { legend: { labels: { color: 'white' } } } }
+    });
+
+    // 3. Departmental Performance Chart
+    const deptCtx = document.getElementById('deptChart').getContext('2d');
+    new Chart(deptCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Water', 'Elect.', 'Roads', 'Waste'],
+            datasets: [{
+                label: 'Resolution Rate %',
+                data: [88, 75, 92, 68],
+                backgroundColor: ['#38bdf8', '#facc15', '#fb923c', '#f87171']
+            }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+
+    // 4. Scroll Reveal Animations
+    gsap.from(".role-card", {
+        scrollTrigger: ".role-grid",
+        y: 50, opacity: 0, duration: 1, stagger: 0.2
+    });
+
+    gsap.from(".chart-box", {
+        scrollTrigger: ".analytics-grid",
+        scale: 0.9, opacity: 0, duration: 1, stagger: 0.3
+    });
+});
 /* =====================================================
    2. ADMIN DASHBOARD TOGGLE (home.html)
 ===================================================== */
-function toggleAdminPanel() {
-    const panel = document.getElementById("adminPanel");
-    if (!panel) return;
+/**
+ * ADMIN DASHBOARD LOGIC
+ * Manages complaint selection and departmental resolver assignment
+ */
 
-    panel.style.display =
-        panel.style.display === "block" ? "none" : "block";
+// Data mapping for different departments and their specific resolvers
+// Mapping resolvers to their specific departments
+const departmentalStaff = {
+    water: ["Piyush", "Alok", "Ravi"],
+    electricity: ["Shivam", "Yash", "Pratyush"],
+    road: ["Aman", "Karan", "Suman"],
+    waste: ["Riya", "Mohit", "Vikash"]
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Initialize Real-time Clock and Greeting
+    const updateTime = () => {
+        const now = new Date();
+        const hrs = now.getHours();
+        let greeting = "Good Evening";
+        if (hrs < 12) greeting = "Good Morning";
+        else if (hrs < 17) greeting = "Good Afternoon";
+        
+        const dayGreetingElement = document.getElementById("dayGreeting");
+        const timeDisplayElement = document.getElementById("dateTimeDisplay");
+        
+        if(dayGreetingElement) dayGreetingElement.innerText = greeting;
+        if(timeDisplayElement) timeDisplayElement.innerText = now.toLocaleString();
+    };
+    updateTime();
+    setInterval(updateTime, 1000);
+
+    const deptSelect = document.getElementById("departmentSelect");
+    const resolverSelect = document.getElementById("resolverSelect");
+    const idSelect = document.getElementById("selectedId");
+    const assignmentForm = document.getElementById("assignmentForm");
+
+    // 2. Select Complaint from Table Logic
+    window.selectComplaint = function(id) {
+        if (idSelect) {
+            idSelect.value = id;
+            showToast(`Editing Complaint #${id}`);
+        }
+    };
+
+    // 3. Dynamic Resolver Filtering Logic
+    if (deptSelect && resolverSelect) {
+        deptSelect.addEventListener("change", () => {
+            const selectedDept = deptSelect.value;
+            resolverSelect.innerHTML = '<option value="">Assign Staff</option>';
+            
+            if (selectedDept && departmentalStaff[selectedDept]) {
+                departmentalStaff[selectedDept].forEach(name => {
+                    const opt = document.createElement("option");
+                    opt.value = name;
+                    opt.textContent = name;
+                    resolverSelect.appendChild(opt);
+                });
+            }
+        });
+    }
+
+    // 4. Assignment Confirmation Logic
+    if (assignmentForm) {
+        assignmentForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            if(!idSelect.value || !resolverSelect.value) {
+                return alert("Please select a Complaint ID and a Resolver Name!");
+            }
+            
+            // Show Loader Simulation
+            const loader = document.getElementById("loader");
+            if(loader) loader.style.display = "flex";
+
+            setTimeout(() => {
+                if(loader) loader.style.display = "none";
+                // Final Success Message as requested
+                alert(`Complaint #${idSelect.value} successfully assigned to respective department staff: ${resolverSelect.value}`);
+                assignmentForm.reset();
+            }, 1000);
+        });
+    }
+});
+
+// Helper for UI Toasts
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    if(!toast) return;
+    toast.innerText = message;
+    toast.style.display = "block";
+    setTimeout(() => { toast.style.display = "none"; }, 3000);
 }
-
 /* =====================================================
    3. BEFORE–AFTER IMAGE SLIDER (approval.html)
 ===================================================== */
@@ -144,29 +298,66 @@ if (submitBtn) {
 /* =====================================================
    LOGIN REDIRECT LOGIC (login.html)
 ===================================================== */
-const loginForm = document.getElementById("loginForm");
+/**
+ * LOGIN REDIRECTION LOGIC
+ * Redirects the prototype based on user selection
+ */
 
-if (loginForm) {
-    loginForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.getElementById("loginForm");
+    const roleSelect = document.getElementById("roleSelect");
 
-        const params = new URLSearchParams(window.location.search);
-        const role = params.get("role");
+    if (loginForm) {
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
 
-        showToast("Login successful");
+            const role = roleSelect.value;
+            console.log("Selected Role:", role); // Check your console (F12) to see this
 
-        setTimeout(() => {
-            if (role === "citizen") {
-                window.location.href = "index.html";
-            } 
-            else if (role === "resolver") {
-                window.location.href = "resolve.html";
-            } 
-            else if (role === "admin") {
-                window.location.href = "home.html";
+            if (!role || role === "") {
+                alert("Please select a role first!");
+                return;
             }
-        }, 1200);
-    });
+
+            // Redirect Logic
+            setTimeout(() => {
+                // FIXED: Changed "user/" to "user"
+                if (role === "user") {
+                    window.location.href = "index.html"; 
+                } else if (role === "admin") {
+                    window.location.href = "admin.html"; 
+                } else if (role === "resolver") {
+                    window.location.href = "resolve.html"; 
+                } else {
+                    alert("Error: Invalid Role Selection");
+                }
+            }, 500);
+        });
+    }
+});
+
+/**
+ * UTILITY: Show Toast Notification
+ */
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    if (toast) {
+        toast.textContent = message;
+        toast.style.display = "block";
+        setTimeout(() => { toast.style.display = "none"; }, 3000);
+    }
+}
+
+/**
+ * Utility to show status toast
+ */
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    if (toast) {
+        toast.textContent = message;
+        toast.style.display = "block";
+        setTimeout(() => { toast.style.display = "none"; }, 3000);
+    }
 }
 
 /* =====================================================
@@ -227,4 +418,87 @@ if (adminSubmitBtn) {
             status.innerText = "";
         });
     });
+}
+document.addEventListener("DOMContentLoaded", () => {
+    // Clock Initialization
+    const updateTime = () => {
+        const now = new Date();
+        const display = document.getElementById("dateTimeDisplay");
+        if(display) display.textContent = now.toLocaleString();
+    };
+    updateTime();
+    setInterval(updateTime, 1000);
+
+    const activeIdInput = document.getElementById("activeTaskId");
+    const remarksTextarea = document.getElementById("adminRemarks");
+    const submitBtn = document.getElementById("submitProofBtn");
+
+    /**
+     * LOGIC: Populate the Resolution Pane
+     * @param {string} id - The Complaint ID
+     * @param {string} title - The title of the issue
+     * @param {string} remarks - The instructions from the admin
+     */
+    window.openResolution = (id, title, remarks) => {
+        if (activeIdInput) {
+            activeIdInput.value = id;
+            remarksTextarea.value = `Issue: ${title}\nInstruction: ${remarks}`;
+            
+            // Animation: Pulse the portal to show it's updated
+            const portal = document.querySelector(".assignment-section");
+            portal.style.transform = "scale(1.02)";
+            setTimeout(() => portal.style.transform = "scale(1)", 200);
+            
+            showToast(`Task ${id} Selected`);
+        }
+    };
+
+    // Submission Logic
+  document.addEventListener("DOMContentLoaded", () => {
+    // 1. Live Clock & Greeting
+    const updateTime = () => {
+        const now = new Date();
+        const display = document.getElementById("dateTimeDisplay");
+        if(display) display.textContent = now.toLocaleString();
+    };
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // 2. Inter-Phase Task Selection
+    const activeIdInput = document.getElementById("activeTaskId");
+    const remarksTextarea = document.getElementById("adminRemarks");
+
+    window.openResolution = (id, title, remarks) => {
+        if (activeIdInput) {
+            activeIdInput.value = id;
+            remarksTextarea.value = `Issue: ${title}\nInstruction: ${remarks}`;
+            
+            // Visual feedback on selection
+            const portal = document.querySelector(".portal-section");
+            portal.style.borderColor = "#34d399";
+            setTimeout(() => portal.style.borderColor = "rgba(255,255,255,0.1)", 1000);
+            
+            showToast(`Task ${id} Ready for Resolution`);
+        }
+    };
+
+    // 3. Final Submission Simulation
+    const submitBtn = document.getElementById("submitProofBtn");
+    if(submitBtn) {
+        submitBtn.addEventListener("click", () => {
+            const id = activeIdInput.value;
+            if(!id) return alert("Select a task first!");
+            
+            showToast("Verifying Proof...");
+            setTimeout(() => {
+                alert(`SUCCESS: Work proof for ${id} submitted. AI Verification: 94% Match.`);
+                location.reload(); // Refresh to update task list
+            }, 1500);
+        });
+    }
+});
+
+function showToast(m) {
+    const t = document.getElementById("toast");
+    if(t) { t.textContent = m; t.style.display = "block"; setTimeout(() => t.style.display = "none", 3000); }
 }
