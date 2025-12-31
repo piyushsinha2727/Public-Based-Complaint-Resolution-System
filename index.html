@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Raise Complaint</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raise Complaint | PBCRS</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="resolve-page">
@@ -14,60 +16,69 @@
 
     <h1>Raise Complaint</h1>
     <p class="subtitle">
-        Submit issue with mandatory proof
+       Enter the details 
     </p>
 
     <div class="glass-card">
 
         <form id="complaintForm" enctype="multipart/form-data">
 
-            <!-- Description -->
+            <div class="form-section-title">Citizen Details</div>
+            
+            <div class="field">
+                <label>Full Name</label>
+                <input type="text" id="citizenName" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-row">
+                <div class="field">
+                    <label>Email Address</label>
+                    <input type="email" id="citizenEmail" placeholder="yourname@example.com" required>
+                </div>
+                <div class="field">
+                    <label>Phone Number</label>
+                    <input type="tel" id="citizenPhone" placeholder="+91 XXXXX XXXXX" required>
+                </div>
+            </div>
+
+          
+
+            <div class="field">
+                <label>Complaint Name</label>
+                <input type="text" id="complaintTitle" placeholder="Short title (e.g., Water Pipe Leakage)" required>
+            </div>
+
             <div class="field">
                 <label>Complaint Description</label>
-                <input
-                    type="text"
-                    id="description"
-                    placeholder="Describe the civic issue"
-                    required
-                >
+                <textarea id="description" rows="3" placeholder="Describe the civic issue in detail" required></textarea>
             </div>
 
-            <!-- Location -->
             <div class="field">
                 <label>Location</label>
-                <input
-                    type="text"
-                    id="location"
-                    placeholder="Enter location"
-                    required
-                >
+                <input type="text" id="location" placeholder="Enter specific location or landmark" required>
             </div>
 
-            <!-- Upload Section -->
             <div class="upload-grid">
 
-                <!-- Before Image -->
                 <div class="image-box upload-box">
-                    <p>Before Image (Proof)</p>
+                
                     <label class="upload-area">
-                        <input type="file" id="beforeImage" hidden required>
-                        <span>📤 Upload Image</span>
+                        <input type="file" id="beforeImage" hidden required accept="image/*">
+                        <span>📤 Upload Photo Proof</span>
                     </label>
                 </div>
 
-                <!-- Info Box -->
                 <div class="image-box">
                     <p><b>Important</b></p>
-                    <p style="font-size:13px;color:#cbd5f5;">
-                        Complaint will not be processed without image proof.
+                    <p style="font-size:12px; color:#cbd5f5; line-height: 1.4;">
+                        Our AI analyzes images for authenticity. Ensure the photo is clear and clearly shows the issue.
                     </p>
                 </div>
 
             </div>
 
-            <!-- Submit -->
             <button type="submit" class="glow-btn">
-                Submit Complaint
+                Submit Official Complaint
             </button>
 
         </form>
@@ -77,11 +88,14 @@
     </div>
 </div>
 
-<!-- Loader & Toast (recommended) -->
 <div class="loader" id="loader"></div>
 <div class="toast" id="toast"></div>
 
 <script src="script.js"></script>
+
+<footer class="admin-footer">
+    <p>All Rights Reserved @2025-2026 | PBCRS Copyright Claimed</p>
+</footer>
 
 </body>
 </html>
