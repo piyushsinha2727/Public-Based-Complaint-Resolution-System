@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Resolve & Restore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | PBCRS</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="resolve-page">
@@ -11,50 +13,40 @@
 <div class="star-bg"></div>
 
 <div class="resolve-wrapper">
-
-    <h1>Resolve & Restore</h1>
-    <p class="subtitle">Upload Resolution Proof</p>
+    <h1>Login</h1>
+    <p class="subtitle">Access your dashboard</p>
 
     <div class="glass-card">
-
-        <!-- Complaint ID -->
-        <div class="field">
-            <label>Complaint ID</label>
-            <input type="number" id="complaintId" placeholder="Enter Complaint ID" required>
-        </div>
-
-        <!-- Upload Section -->
-        <div class="upload-grid">
-
-            <!-- Before Image -->
-            <div class="image-box">
-                <p>Before (Complaint)</p>
-                <img src="https://via.placeholder.com/200x140?text=Before+Image">
+        <form id="loginForm">
+            <div class="field">
+                <label>Select Role</label>
+                <select id="roleSelect" class="custom-select" required>
+                    <option value="">-- Choose Role --</option>
+                    <option value="user">User / Citizen</option>
+                    <option value="admin">Administrator</option>
+                    <option value="resolver">Resolver</option>
+                </select>
             </div>
 
-            <!-- After Image -->
-            <div class="image-box upload-box">
-                <p>After (Resolution Proof)</p>
-                <label class="upload-area">
-                    <input type="file" id="afterImage" hidden required>
-                    <span>📤 Upload Proof</span>
-                </label>
+            <div class="field">
+                <label>Email</label>
+                <input type="email" id="loginEmail" placeholder="email@example.com" required>
             </div>
 
-        </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="••••••••" required>
+            </div>
 
-        <!-- Submit -->
-        <button class="glow-btn" id="submitProofBtn">
-            Submit Final Proof
-        </button>
+            <button class="glow-btn" type="submit">Login</button>
+        </form>
 
-        <p id="resolveStatus"></p>
-
+        <p style="margin-top:15px;font-size:13px;color:#cbd5f5;">
+            New citizen? <a href="signup.html" style="color:#38bdf8; text-decoration:none;">Create account</a>
+        </p>
     </div>
 </div>
 
-<!-- Loader & Toast -->
-<div class="loader" id="loader"></div>
 <div class="toast" id="toast"></div>
 
 <script src="script.js"></script>
