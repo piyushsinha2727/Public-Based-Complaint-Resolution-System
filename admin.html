@@ -1,64 +1,100 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Verification | PBCRS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | PBCRS</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="resolve-page">
+<body class="admin-page">
+    <div class="star-bg"></div>
 
-<div class="star-bg"></div>
-
-<div class="resolve-wrapper">
-
-    <h1>Admin Verification</h1>
-    <p class="subtitle">Upload inspection proof</p>
-
-    <div class="glass-card">
-
-        <!-- Complaint ID -->
-        <div class="field">
-            <label>Complaint ID</label>
-            <input type="number" id="adminComplaintId" placeholder="Enter Complaint ID" required>
+    <nav class="admin-nav">
+        <div class="greeting-box">
+            <span id="dayGreeting">Hey</span>, Admin | <span id="dateTimeDisplay"></span>
         </div>
+        <div class="nav-title"><h1> ADMINISTATOR DASHBOARD </h1></div>
+        <a href="home.html" class="logout-btn">Logout 🚪</a>
+    </nav>
 
-        <!-- ADMIN IMAGE UPLOAD -->
-        <div class="upload-grid">
-
-            <!-- Preview -->
-            <div class="image-box">
-                <p>Admin Inspection Preview</p>
-                <img id="adminPreview"
-                     src="https://via.placeholder.com/200x140?text=No+Image"
-                     style="width:100%;border-radius:10px;">
+    <div class="dashboard-container">
+        <div class="dashboard-grid">
+            
+            <div class="glass-card table-section blue-glow">
+                <h3>Recent Complaints</h3>
+                <div class="table-wrapper">
+                    <table class="mini-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="complaintTableBody">
+                            <tr><td>#101</td><td>Water Leakage</td><td><span class="severe">Severe</span></td><td><button class="role-btn blue" onclick="selectComplaint('101')">View</button></td></tr>
+                            <tr><td>#102</td><td>Broken Light</td><td><span class="moderate">Moderate</span></td><td><button class="role-btn blue" onclick="selectComplaint('102')">View</button></td></tr>
+                            <tr><td>#103</td><td>Road Pothole</td><td><span class="moderate">Moderate</span></td><td><button class="role-btn blue" onclick="selectComplaint('103')">View</button></td></tr>
+                            <tr><td>#104</td><td>Waste Disposal</td><td><span class="less">Low</span></td><td><button class="role-btn blue" onclick="selectComplaint('104')">View</button></td></tr>
+                            <tr><td>#105</td><td>Short Circuit</td><td><span class="severe">Severe</span></td><td><button class="role-btn blue" onclick="selectComplaint('105')">View</button></td></tr>
+                            <tr><td>#106</td><td>Sewerage Block</td><td><span class="severe">Severe</span></td><td><button class="role-btn blue" onclick="selectComplaint('106')">View</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="priority-legend">
+                    <div class="legend-item"><span class="dot red"></span> Severe</div>
+                    <div class="legend-item"><span class="dot yellow"></span> Moderate</div>
+                    <div class="legend-item"><span class="dot orange"></span> Low Priority</div>
+                </div>
             </div>
 
-            <!-- Upload -->
-            <div class="image-box upload-box">
-                <p>Upload Inspection Image</p>
-                <label class="upload-area">
-                    <input type="file" id="adminImage" hidden accept="image/*">
-                    <span>📤 Upload Photo</span>
-                </label>
+            <div class="glass-card assignment-section yellow-glow">
+                <h3>Assign Resolver</h3>
+                <form id="assignmentForm">
+                    <div class="field">
+                        <label>Complaint ID</label>
+                        <select class="custom-select" id="selectedId">
+                            <option value="">Select ID</option>
+                            <option value="101">#101</option>
+                            <option value="102">#102</option>
+                            <option value="103">#103</option>
+                            <option value="104">#104</option>
+                            <option value="105">#105</option>
+                            <option value="106">#106</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Department</label>
+                        <select class="custom-select" id="departmentSelect">
+                            <option value="">Select Department</option>
+                            <option value="water">Water Supply</option>
+                            <option value="electricity">Electricity Board</option>
+                            <option value="road">Roads & Infra</option>
+                            <option value="waste">Waste Management</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Resolver Name</label>
+                        <select class="custom-select" id="resolverSelect">
+                            <option value="">Assign Staff</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="glow-btn">Confirm Assignment</button>
+                </form>
             </div>
-
         </div>
-
-        <!-- ACTION -->
-        <button class="glow-btn approve" id="adminSubmitBtn">
-            Submit Admin Proof
-        </button>
-
-        <p id="adminStatus"></p>
-
     </div>
-</div>
 
-<!-- Loader & Toast -->
-<div class="loader" id="loader"></div>
-<div class="toast" id="toast"></div>
+    <footer class="dashboard-footer">
+        <p>All Rights Reserved @2025-2026 | PBCRS Copyright Claimed</p>
+    </footer>
 
-<script src="script.js"></script>
+    <div class="loader" id="loader"></div>
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
