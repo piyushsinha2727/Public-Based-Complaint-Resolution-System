@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PBCRS – Public-Based Complaint Resolution System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PBCRS | Home</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 
 <body class="home-page">
@@ -11,65 +15,96 @@
 <div class="star-bg"></div>
 
 <div class="home-wrapper">
-
-    <h1>PBCRS – Public-Based Complaint Resolution System</h1>
-    <p class="home-subtitle">
-        AI-assisted platform for transparent and accountable civic issue resolution
-    </p>
+    <header class="hero-section">
+        <h1>PBCRS – Public-Based Complaint Resolution System</h1>
+        <p class="home-subtitle">AI-assisted platform for transparent and accountable civic issue resolution</p>
+    </header>
 
     <div class="role-grid">
-
-        <!-- ================= CITIZEN ================= -->
         <div class="role-card blue-glow">
             <div class="icon">👤</div>
             <h3>Public / Citizen</h3>
-            <p>
-                Report civic issues with image and location,
-                track progress, and verify resolution.
-            </p>
-
-            <!-- LOGIN GATE -->
-            <a href="login.html?role=citizen" class="role-btn blue">
-                Raise Complaint
-            </a>
+            <p>Report civic issues with image and location proof.</p>
+            <a href="login.html?role=citizen" class="role-btn blue">Raise Complaint</a>
         </div>
 
-        <!-- ================= ADMINISTRATOR ================= -->
         <div class="role-card yellow-glow">
             <div class="icon">🛠️</div>
             <h3>Administrator</h3>
-            <p>
-                Review complaints, prioritize severity,
-                assign resolvers, and monitor SLAs.
-            </p>
-
-            <!-- LOGIN GATE -->
-            <a href="login.html?role=admin" class="role-btn yellow">
-                Admin Dashboard
-            </a>
+            <p>Review, prioritize, and assign departmental staff.</p>
+            <a href="login.html?role=admin" class="role-btn yellow">Admin Dashboard</a>
         </div>
 
-        <!-- ================= RESOLVER ================= -->
         <div class="role-card green-glow">
             <div class="icon">👷</div>
             <h3>Resolver</h3>
-            <p>
-                Resolve assigned issues, upload proof of work,
-                and update complaint status.
-            </p>
-
-            <!-- LOGIN GATE -->
-            <a href="login.html?role=resolver" class="role-btn green">
-                Resolver Dashboard
-            </a>
+            <p>Resolve issues and upload final work proof.</p>
+            <a href="login.html?role=resolver" class="role-btn green">Resolver Dashboard</a>
         </div>
-
     </div>
 
+    <section class="glass-card intro-section">
+
+        
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3 class="counter" data-target="1250">1250</h3>
+                <span>Complaints Registered</span>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="450">250</h3>
+                <span>Under Review</span>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="800">1000</h3>
+                <span>Resolved Successfully</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="analytics-grid">
+        <div class="glass-card chart-box">
+            <h3>Monthly Resolution Rate</h3>
+            <canvas id="resolutionChart"></canvas>
+        </div>
+        <div class="glass-card chart-box">
+            <h3>Departmental Efficiency</h3>
+            <canvas id="deptChart"></canvas>
+        </div>
+    </section>
+
+    <section class="glass-card query-section">
+        <h2>Have a Question?</h2>
+        <form id="queryForm" class="query-form">
+            <div class="form-row">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your name" required>
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="Enter phone no.">
+                </div>
+                <div class="input-group">
+                    <label>Your Query</label>
+                    <textarea placeholder="How can we help you?" rows="3" required></textarea>
+                </div>
+            </div>
+            <button type="submit" class="glow-btn">Submit Query</button>
+        </form>
+    </section>
 </div>
 
-<!-- ONLY external JS -->
-<script src="script.js"></script>
+<footer class="admin-footer">
+    <p>All Rights Reserved @2025-2026 | PBCRS Copyright Claimed</p>
+</footer>
 
+<script src="script.js"></script>
 </body>
 </html>
