@@ -3,50 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | PBCRS</title>
+    <title>Resolve & Restore | Resolver Dashboard</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="resolve-page">
 
 <div class="star-bg"></div>
 
-<div class="resolve-wrapper">
-    <h1>Login</h1>
-    <p class="subtitle">Access your dashboard</p>
+<nav class="admin-nav">
+    <div class="greeting-box">
+        <span id="dayGreeting">Good Evening</span>, Resolver | <span id="dateTimeDisplay"></span>
+    </div>
+    <div class="nav-title">Resolver Portal</div>
+    <a href="home.html" class="logout-btn">Logout 🚪</a>
+</nav>
 
-    <div class="glass-card">
-        <form id="loginForm">
-            <div class="field">
-                <label>Select Role</label>
-                <select id="roleSelect" class="custom-select" required>
-                    <option value="">-- Choose Role --</option>
-                    <option value="user">User / Citizen</option>
-                    <option value="admin">Administrator</option>
-                    <option value="resolver">Resolver</option>
-                </select>
+<div class="dashboard-container">
+    <div class="dashboard-grid">
+        
+        <div class="glass-card table-section blue-glow">
+            <h3 class="section-title">Assigned Tasks</h3>
+            <div class="table-wrapper">
+                <table class="mini-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="assignedTasksBody">
+                        <tr>
+                            <td>#101</td>
+                            <td>Water Leakage</td>
+                            <td><span class="assigned-status">Assigned</span></td>
+                            <td><button class="select-btn" onclick="openResolution('#101', 'Water Leakage', 'Repair the pipe near the main gate.')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>#105</td>
+                            <td>Short Circuit</td>
+                            <td><span class="high-priority-status">High Priority</span></td>
+                            <td><button class="select-btn" onclick="openResolution('#105', 'Short Circuit', 'Replace burnt junction box wires.')">Select</button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+        </div>
 
-            <div class="field">
-                <label>Email</label>
-                <input type="email" id="loginEmail" placeholder="email@example.com" required>
+        <div class="glass-card portal-section green-glow">
+            <h3 class="section-title">Resolution Portal</h3>
+            <div id="resolutionForm">
+                <div class="field">
+                    <label>Selected Task ID</label>
+                    <input type="text" id="activeTaskId" readonly placeholder="Select a task from the list">
+                </div>
+
+                <div class="field">
+                    <label>Admin Remarks / Work Detail</label>
+                    <textarea id="adminRemarks" readonly placeholder="Task details will appear here..." rows="4"></textarea>
+                </div>
+
+                <div class="upload-grid">
+                    <div class="upload-box-wrapper">
+                        <label class="upload-area" for="afterImage">
+                            <div class="upload-icon">📤</div>
+                            <p>Upload Final Proof</p>
+                            <span>Upload Photo</span>
+                            <input type="file" id="afterImage" hidden accept="image/*">
+                        </label>
+                    </div>
+                    <div class="verification-card">
+                        <p><b>Verification</b></p>
+                        <p style="font-size:12px; color:#cbd5f5;">
+                            Upload a clear photo of the fixed site. AI will compare this with the complaint image.
+                        </p>
+                    </div>
+                </div>
+
+                <button class="confirm-btn" id="submitProofBtn">
+                    Submit Work Proof
+                </button>
             </div>
-
-            <div class="field">
-                <label>Password</label>
-                <input type="password" id="loginPassword" placeholder="••••••••" required>
-            </div>
-
-            <button class="glow-btn" type="submit">Login</button>
-        </form>
-
-        <p style="margin-top:15px;font-size:13px;color:#cbd5f5;">
-            New citizen? <a href="signup.html" style="color:#38bdf8; text-decoration:none;">Create account</a>
-        </p>
+        </div>
     </div>
 </div>
 
+<footer class="admin-footer">
+    <p>All Rights Reserved @2025-2026 | PBCRS Copyright Claimed</p>
+</footer>
+
+<div class="loader" id="loader"></div>
 <div class="toast" id="toast"></div>
 
 <script src="script.js"></script>
