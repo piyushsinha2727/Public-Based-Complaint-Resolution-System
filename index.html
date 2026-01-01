@@ -8,94 +8,97 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="resolve-page">
+<body class="resolve-page home-page">
+    <div class="star-bg"></div>
 
-<div class="star-bg"></div>
+    <nav class="admin-nav">
+        <div class="greeting-box">PBCRS | Citizen Portal</div>
+        <div class="nav-actions" style="display: flex; gap: 15px; align-items: center;">
+            <a href="approval.html" class="status-btn">View Status of Application 🔍</a>
+            <a href="home.html" class="logout-btn" id="logoutBtn">Logout 🚪</a>
+        </div>
+    </nav>
 
-<div class="resolve-wrapper">
-
-    <h1>Raise Complaint</h1>
-    <p class="subtitle">
-       Enter the details 
-    </p>
-
-    <div class="glass-card">
-
-        <form id="complaintForm" enctype="multipart/form-data">
-
-            <div class="form-section-title">Citizen Details</div>
+    <div class="dashboard-container">
+        <div class="dashboard-grid">
             
-            <div class="field">
-                <label>Full Name</label>
-                <input type="text" id="citizenName" placeholder="Enter your full name" required>
-            </div>
-
-            <div class="form-row">
-                <div class="field">
-                    <label>Email Address</label>
-                    <input type="email" id="citizenEmail" placeholder="yourname@example.com" required>
+            <div class="glass-card intro-section blue-glow">
+                <h2 class="section-title" style="color: #38bdf8; margin-bottom: 20px;">Concept & Vision</h2>
+                <div class="vision-content">
+                    <p><strong>1. AI-Assisted Civic Platform:</strong> Replaces traditional grievance systems with transparent workflows. Visual verification bridges the gap between citizens and government.</p>
+                    <p><strong>2. Mandatory Proof:</strong> Direct complaint submission requires image and location evidence.</p>
+                    <p><strong>3. AI Verification:</strong> AI compares "Before" and "After" images automatically to ensure strict similarity scores.</p>
+                    <p><strong>4. Impact & Analytics:</strong> System-wide monitoring ensures timely government accountability.</p>
                 </div>
-                <div class="field">
-                    <label>Phone Number</label>
-                    <input type="tel" id="citizenPhone" placeholder="+91 XXXXX XXXXX" required>
-                </div>
-            </div>
-
-          
-
-            <div class="field">
-                <label>Complaint Name</label>
-                <input type="text" id="complaintTitle" placeholder="Short title (e.g., Water Pipe Leakage)" required>
-            </div>
-
-            <div class="field">
-                <label>Complaint Description</label>
-                <textarea id="description" rows="3" placeholder="Describe the civic issue in detail" required></textarea>
-            </div>
-
-            <div class="field">
-                <label>Location</label>
-                <input type="text" id="location" placeholder="Enter specific location or landmark" required>
-            </div>
-
-            <div class="upload-grid">
-
-                <div class="image-box upload-box">
                 
-                    <label class="upload-area">
-                        <input type="file" id="beforeImage" hidden required accept="image/*">
-                        <span>📤 Upload Photo Proof</span>
-                    </label>
+                <div class="important-note">
+                    <p>⚠️ Fields marked with (*) are mandatory. Complaints without valid image proof will not be processed.</p>
                 </div>
-
-                <div class="image-box">
-                    <p><b>Important</b></p>
-                    <p style="font-size:12px; color:#cbd5f5; line-height: 1.4;">
-                        Our AI analyzes images for authenticity. Ensure the photo is clear and clearly shows the issue.
-                    </p>
-                </div>
-
             </div>
 
-            <button type="submit" class="glow-btn">
-                Submit Official Complaint
-            </button>
+            <div class="glass-card form-section yellow-glow">
+                <h1 style="text-align: left; margin-bottom: 5px;">Raise Complaint</h1>
+                <p class="subtitle" style="text-align: left; margin-bottom: 25px;">Enter the required information below</p>
+                
+                <form id="complaintForm" enctype="multipart/form-data">
+                    <div class="form-section-title">Citizen Details</div>
+                    <div class="field">
+                        <label>Full Name *</label>
+                        <input type="text" id="citizenName" placeholder="Enter your full name" required>
+                    </div>
 
-        </form>
+                    <div class="form-row">
+                        <div class="field">
+                            <label>Email Address *</label>
+                            <input type="email" id="citizenEmail" placeholder="yourname@example.com" required>
+                        </div>
+                        <div class="field">
+                            <label>Phone Number *</label>
+                            <input type="tel" id="citizenPhone" placeholder="+91 XXXXX XXXXX" required>
+                        </div>
+                    </div>
 
-        <p id="statusMessage"></p>
+                    <div class="form-section-title">Issue Details</div>
+                    <div class="field">
+                        <label>Complaint Title *</label>
+                        <input type="text" id="complaintTitle" placeholder="e.g., Street Light Repair" required>
+                    </div>
 
+                    <div class="field">
+                        <label>Description *</label>
+                        <textarea id="description" rows="3" placeholder="Detail the issue..." required></textarea>
+                    </div>
+
+                    <div class="field">
+                        <label>Location *</label>
+                        <input type="text" id="location" placeholder="Landmark/Area" required>
+                    </div>
+
+                    <div class="upload-grid" style="grid-template-columns: 1fr 1fr; align-items: center;">
+                        <div class="upload-box-wrapper" style="border: 2px dashed rgba(52, 211, 153, 0.4); padding: 20px; border-radius: 12px; text-align: center;">
+                            <label class="upload-area" style="cursor: pointer;">
+                                <input type="file" id="beforeImage" hidden required accept="image/*">
+                                <span style="color: #34d399; font-weight: bold;">📤 Upload Image Proof *</span>
+                            </label>
+                        </div>
+                        <div class="verification-card" style="background: rgba(255, 255, 255, 0.03); padding: 15px; border-radius: 12px; border: 1px solid rgba(52, 211, 153, 0.2);">
+                            <p style="font-size:11px; color:#cbd5f5;">AI analyzes this image for resolution comparison.</p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="glow-btn">Submit Official Complaint</button>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="loader" id="loader"></div>
-<div class="toast" id="toast"></div>
+    <footer class="admin-footer">
+        <p>All Rights Reserved @2025-2026 | PBCRS Copyright Claimed</p>
+    </footer>
 
-<script src="script.js"></script>
+    <div class="loader" id="loader"></div>
+    <div class="toast" id="toast"></div>
 
-<footer class="admin-footer">
-    <p>All Rights Reserved @2025-2026 | PBCRS Copyright Claimed</p>
-</footer>
-
+    <script src="script.js"></script>
 </body>
 </html>
