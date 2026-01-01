@@ -43,6 +43,9 @@ body {
    3. HOME / LANDING PAGE
 ===================================================== */
 
+/* =====================================================
+   1. GLOBAL RESET & BASE THEME
+===================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -50,16 +53,17 @@ body {
     font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
-/* Restoring the deep dark background shown in requested screenshots */
 body, html {
     background: radial-gradient(circle at top, #0f172a, #020617) !important;
     background-attachment: fixed;
     color: #ffffff;
     min-height: 100vh;
     overflow-x: hidden;
+    /* Pushes content down to avoid hiding behind fixed nav */
+    padding-top: 90px !important; 
 }
 
-/* Shared utility for Star Background */
+/* Star Background Utility */
 .star-bg {
     position: fixed;
     inset: 0;
@@ -72,35 +76,68 @@ body, html {
 }
 
 /* =====================================================
-   2. HOME PAGE LAYOUT
+   2. PROTOTYPE NAVIGATION (FINAL JUDGE VIEW)
 ===================================================== */
-.home-wrapper {
-    text-align: center;
-    padding: 80px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+.prototype-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgba(11, 18, 32, 0.95);
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid #38bdf8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    z-index: 10000;
 }
 
-h1 {
-    font-size: clamp(24px, 5vw, 42px);
-    margin-bottom: 10px;
-    background: linear-gradient(to right, #fff, #94a3b8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.nav-brand {
+    color: #facc15;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-.home-subtitle {
-    color: #94a3b8;
-    margin-bottom: 60px;
-    font-size: 1.1rem;
+.nav-links {
+    display: flex;
+    gap: 20px; /* Proper clickable gap between modules */
 }
 
-/* Role Grid Arrangement */
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-links a:hover {
+    background: #38bdf8;
+    color: #020617;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+    transform: translateY(-3px);
+}
+
+/* =====================================================
+   3. HOME PAGE: ROLE GRID
+===================================================== */
 .role-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
-    margin-bottom: 80px;
+    margin: 50px auto;
+    max-width: 1200px;
 }
 
 .role-card {
@@ -109,39 +146,117 @@ h1 {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: 0.4s ease;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
+
+/* Glow Effects */
+.role-card.blue-glow { box-shadow: 0 0 30px rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.3); }
+.role-card.yellow-glow { box-shadow: 0 0 30px rgba(250, 204, 21, 0.15); border-color: rgba(250, 204, 21, 0.3); }
+.role-card.green-glow { box-shadow: 0 0 30px rgba(52, 211, 153, 0.15); border-color: rgba(52, 211, 153, 0.3); }
 
 .role-card:hover {
     transform: translateY(-10px);
     background: rgba(255, 255, 255, 0.08);
 }
 
-.icon { font-size: 50px; margin-bottom: 20px; }
+.role-card .icon { font-size: 50px; margin-bottom: 20px; }
 
-/* Glowing Effects */
-.blue-glow { box-shadow: 0 0 30px rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.3); }
-.yellow-glow { box-shadow: 0 0 30px rgba(250, 204, 21, 0.15); border-color: rgba(250, 204, 21, 0.3); }
-.green-glow { box-shadow: 0 0 30px rgba(52, 211, 153, 0.15); border-color: rgba(52, 211, 153, 0.3); }
-
-/* Buttons */
+/* =====================================================
+   4. INTERACTIVE BUTTONS
+===================================================== */
 .role-btn {
-    margin-top: auto;
-    padding: 12px 25px;
+    margin-top: 25px;
+    padding: 14px 25px;
     border-radius: 30px;
-    font-weight: 700;
+    font-weight: 800; /* Bold clickable design */
     text-decoration: none;
-    transition: 0.3s;
+    transition: 0.4s ease;
     width: 100%;
+    text-align: center;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.blue { background: #38bdf8; color: #020617; }
-.yellow { background: #facc15; color: #020617; }
-.green { background: #34d399; color: #020617; }
+.role-btn.blue { 
+    background: #38bdf8; 
+    color: #020617; 
+}
+.role-btn.blue:hover { 
+    box-shadow: 0 0 25px #38bdf8; 
+    transform: scale(1.05);
+}
 
+.role-btn.yellow { 
+    background: #facc15; 
+    color: #020617; 
+}
+.role-btn.yellow:hover { 
+    box-shadow: 0 0 25px #facc15; 
+    transform: scale(1.05);
+}
+
+.role-btn.green { 
+    background: #34d399; 
+    color: #020617; 
+}
+.role-btn.green:hover { 
+    box-shadow: 0 0 25px #34d399; 
+    transform: scale(1.05);
+}
+
+/* =====================================================
+   5. UTILITIES (STATS & ANALYTICS)
+===================================================== */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px 0;
+}
+
+.stat-item h3 {
+    font-size: 3.5rem; /* Large bold counters */
+    color: #38bdf8;
+    margin-bottom: 5px;
+    font-weight: 800;
+}
+
+/* =====================================================
+   6. BOLD LOGOUT BUTTON
+===================================================== */
+.logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(248, 113, 113, 0.25);
+    border: 2px solid #f87171;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 800; /* Extra bold for clarity */
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #f87171;
+    color: #020617;
+    box-shadow: 0 0 25px rgba(248, 113, 113, 0.6);
+}
 /* =====================================================
    3. INTRODUCTION & STATS SECTION
 ===================================================== */
@@ -535,53 +650,49 @@ h1 {
 ===================================================== */
 
 /* Container to center the login card perfectly in the middle of the screen */
+/* Centering the entire Registration Block */
 .resolve-page {
-    background: radial-gradient(circle at top, #0f172a, #020617) !important;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    padding: 20px;
+    padding: 40px 20px;
 }
 
-/* Styling the 'Login' title and 'Access your dashboard' subtitle */
+/* Header Alignment */
 .resolve-wrapper {
     width: 100%;
-    max-width: 500px; /* Limits the width of the entire login area */
-    text-align: left; /* Aligns text with the form inputs */
-    margin-bottom: 20px;
+    max-width: 500px;
+    text-align: left;
+    margin-bottom: 25px;
 }
 
 .resolve-wrapper h1 {
-    font-size: 48px;
-    margin-bottom: 5px;
-    color: #ffffff;
+    font-size: 38px;
+    background: linear-gradient(to right, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
 }
 
-.subtitle {
-    color: #94a3b8;
-    font-size: 16px;
-}
-
-/* Fixing the Card Alignment */
+/* Fix for the card size and depth */
 .glass-card {
     width: 100%;
-    max-width: 500px; /* Prevents the card from stretching full-screen */
+    max-width: 500px;
     padding: 40px;
-    border-radius: 20px;
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 40px rgba(56, 189, 248, 0.1);
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
-/* Proper Form Field Alignment */
+/* Input Field Polish (Fixes the tiny boxes from image_ff5ab0.png) */
 .field {
-    margin-bottom: 25px;
+    margin-bottom: 22px;
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 
 .field label {
@@ -591,44 +702,49 @@ h1 {
     font-weight: 600;
 }
 
-/* Fix for the tiny input boxes in your screenshot */
-.field input, 
-.custom-select {
-    width: 100%; /* Forces inputs to take full width of the card */
-    padding: 14px;
-    border-radius: 10px;
+.field input, .custom-select {
+    width: 100% !important;
+    padding: 14px 18px;
+    border-radius: 12px;
     background: rgba(0, 0, 0, 0.3);
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.1);
     outline: none;
     font-size: 15px;
-    transition: 0.3s ease;
 }
 
-.field input:focus, 
-.custom-select:focus {
+.field input:focus, .custom-select:focus {
     border-color: #38bdf8;
     box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
 }
 
-/* Centered Login Button */
+/* Hidden Dynamic Fields Logic */
+.hidden-field { display: none; }
+.show-field { display: flex !important; animation: fadeIn 0.4s ease; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Action Button */
 .glow-btn {
     width: 100%;
     padding: 16px;
-    border-radius: 35px;
-    border: none;
+    margin-top: 10px;
+    border-radius: 40px;
     background: linear-gradient(90deg, #38bdf8, #facc15);
     color: #020617;
+    font-weight: 800;
     font-size: 16px;
-    font-weight: 700;
     cursor: pointer;
-    margin-top: 10px;
-    transition: 0.3s ease;
+    border: none;
+    transition: 0.3s;
 }
 
 .glow-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
 }
 /* =====================================================
    RESOLVER DASHBOARD & PORTAL STYLES
@@ -741,4 +857,134 @@ h1 {
     background: #f87171 !important;
     color: #ffffff !important;
     box-shadow: 0 0 15px rgba(248, 113, 113, 0.4);
+}
+
+/* =====================================================
+   ENHANCED BOLD LOGOUT BUTTON
+===================================================== */
+.logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(248, 113, 113, 0.25); /* Slightly deeper tint for clarity */
+    border: 2px solid #f87171; /* Thicker border for bold look */
+    color: #ffffff; /* White text for maximum contrast on dark bg */
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 800; /* Extra bold text */
+    text-transform: uppercase; /* All caps for authority */
+    letter-spacing: 1px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(248, 113, 113, 0.2);
+}
+
+.logout-btn:hover {
+    background: #f87171; /* Solid red fill on hover */
+    color: #020617; /* Dark text for contrast against solid red */
+    box-shadow: 0 0 25px rgba(248, 113, 113, 0.6); /* Aggressive red glow */
+    transform: translateY(-3px) scale(1.05); /* Interactive lift and grow */
+}
+
+/* Optional: Adding an icon effect */
+.logout-btn::after {
+    content: "🚪";
+    font-size: 16px;
+    transition: transform 0.3s;
+}
+
+.logout-btn:hover::after {
+    transform: translateX(4px);
+}   
+
+/* User dashboard*/
+/* Sidebar Layout Arrangement */
+/* Sidebar Layout Arrangement */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px;
+    align-items: start;
+    margin-top: 30px;
+}
+
+/* Concept & Vision Styling */
+.vision-content p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #cbd5f5;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.important-note {
+    background: rgba(248, 113, 113, 0.1);
+    border: 1px solid #f87171;
+    padding: 15px;
+    border-radius: 12px;
+    color: #f87171;
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+/* Status Application Button */
+.status-btn {
+    background: rgba(56, 189, 248, 0.2);
+    border: 1px solid #38bdf8;
+    color: #38bdf8;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.status-btn:hover {
+    background: #38bdf8;
+    color: #020617;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+}
+
+/* Logout Button Styling */
+.logout-btn {
+    background: rgba(248, 113, 113, 0.1) !important;
+    border: 1px solid #f87171 !important;
+    color: #f87171 !important;
+    padding: 8px 18px !important;
+    border-radius: 10px !important;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #f87171 !important;
+    color: #020617 !important;
+    box-shadow: 0 0 20px rgba(248, 113, 113, 0.5);
+}
+
+/* Form Row Alignment */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-section-title {
+    color: #facc15;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 20px 0 10px;
+    border-bottom: 1px solid rgba(250, 204, 21, 0.3);
+    padding-bottom: 5px;
+    text-align: left;
+}
+
+@media (max-width: 900px) {
+    .dashboard-grid { grid-template-columns: 1fr; }
 }
