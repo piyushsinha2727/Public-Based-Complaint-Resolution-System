@@ -502,3 +502,54 @@ function showToast(m) {
     const t = document.getElementById("toast");
     if(t) { t.textContent = m; t.style.display = "block"; setTimeout(() => t.style.display = "none", 3000); }
 }
+// Image Slider Logic for approval.html
+const slider = document.getElementById('slider');
+const overlay = document.querySelector('.slider-overlay');
+
+if(slider && overlay) {
+    slider.addEventListener('input', (e) => {
+        const sliderPos = e.target.value;
+        overlay.style.width = `${sliderPos}%`;
+    });
+}
+
+// Form Submission Simulation
+const complaintForm = document.getElementById('complaintForm');
+if(complaintForm) {
+    complaintForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        showToast("Submitting Complaint... Please wait.");
+        // Animation delay
+        setTimeout(() => {
+            alert("Complaint #109 Submitted Successfully!");
+            window.location.href = "approval.html";
+        }, 2000);
+    });
+}
+
+
+    // 2. Departmental Efficiency (Doughnut Chart)
+    const ctxDept = document.getElementById('deptChart').getContext('2d');
+    new Chart(ctxDept, {
+        type: 'doughnut',
+        data: {
+            labels: ['Roads', 'Medical', 'Water', 'Power'],
+            datasets: [{
+                data: [300, 150, 200, 150],
+                backgroundColor: ['#38bdf8', '#34d399', '#facc15', '#f87171'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            animation: {
+                animateRotate: true,
+                animateScale: true,
+                duration: 2500
+            },
+            plugins: {
+                legend: { position: 'bottom', labels: { color: '#fff' } }
+            }
+        }
+    });
+});
