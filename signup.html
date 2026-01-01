@@ -4,47 +4,52 @@
     <meta charset="UTF-8">
     <title>Sign Up | PBCRS</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body class="resolve-page">
 
 <div class="star-bg"></div>
 
 <div class="resolve-wrapper">
-
-    <h1>Citizen Sign Up</h1>
-    <p class="subtitle">Create your account</p>
+    <h1>REGISTRATION PAGE</h1>
+    <p class="subtitle">Create your secure citizen account</p>
 
     <div class="glass-card">
-
-        <form id="signupForm">
-
+        <form id="signupForm" action="register" method="POST">
             <div class="field">
-                <label>Name</label>
-                <input type="text" required>
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="Enter your full name" required>
             </div>
 
             <div class="field">
-                <label>Email</label>
-                <input type="email" required>
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="yourname@example.com" required>
             </div>
 
             <div class="field">
                 <label>Password</label>
-                <input type="password" required>
+                <input type="password" name="password" placeholder="Create a strong password" required>
             </div>
 
-            <button class="glow-btn" type="submit">
-                Sign Up
-            </button>
+            <div class="field">
+                <label>Select Your Role</label>
+                <select id="roleSelect" name="role" class="custom-select" required>
+                    <option value="user" selected>User / Citizen</option>
+                    <option value="admin">Administrator</option>
+                    <option value="resolver">Resolver / Helpdesk</option>
+                </select>
+            </div>
 
+          
+
+            <button class="glow-btn" type="submit">Complete Registration</button>
         </form>
-
     </div>
 </div>
 
 <div class="toast" id="toast"></div>
-
-<script src="script.js"></script>
+<script src="script.js"></script>    <footer class="dashboard-footer">
+        <p>All Rights Reserved @2025-2026 | PBCRS Copyright Claimed</p>
+    </footer>
 </body>
 </html>
